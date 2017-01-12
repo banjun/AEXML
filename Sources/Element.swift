@@ -47,7 +47,8 @@ open class AEXMLElement {
     open var value: String?
     
     /// XML Element attributes.
-    open var attributes: [String : String]
+    open var attributes: [String : String] {return attributesNSDictionary as! [String : String]}
+    var attributesNSDictionary: NSDictionary
     
     /// Error value (`nil` if there is no error).
     open var error: AEXMLError?
@@ -75,12 +76,12 @@ open class AEXMLElement {
     
         - returns: An initialized `AEXMLElement` object.
     */
-    public init(name: String, value: String? = nil, attributes: [String : String] = [String : String]()) {
+    public init(name: String, value: String? = nil, attributes: NSDictionary = [String : String]() as NSDictionary) {
         self.name = name
         self.value = value
-        self.attributes = attributes
+        self.attributesNSDictionary = attributes
     }
-    
+
     // MARK: - XML Read
     
     /// The first element with given name **(Empty element with error if not exists)**.
@@ -180,7 +181,7 @@ open class AEXMLElement {
     */
     @discardableResult open func addChild(name: String,
                        value: String? = nil,
-                       attributes: [String : String] = [String : String]()) -> AEXMLElement
+                       attributes: NSDictionary = [String : String]() as NSDictionary) -> AEXMLElement
     {
         let child = AEXMLElement(name: name, value: value, attributes: attributes)
         return addChild(child)

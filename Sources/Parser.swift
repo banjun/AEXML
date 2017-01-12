@@ -72,7 +72,7 @@ internal class AEXMLParser: NSObject, XMLParserDelegate {
                       didStartElement elementName: String,
                       namespaceURI: String?,
                       qualifiedName qName: String?,
-                      attributes attributeDict: [String : String])
+                      attributes attributeDict: NSDictionary)
     {
         currentValue = String()
         currentElement = currentParent?.addChild(name: elementName, attributes: attributeDict)
